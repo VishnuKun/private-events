@@ -8,7 +8,11 @@ class UsersController < ApplicationController
 
   # GET /users/1 or /users/1.json
   def show
+    @user = User.find(params[:id])
+    puts @user.inspect # This will print the user object in the console
+    puts @user.username # This will print the username in the console
   end
+
 
   # GET /users/new
   def new
@@ -65,6 +69,6 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.fetch(:user, {})
+      params.require(:user).permit(:username, :email)
     end
 end
